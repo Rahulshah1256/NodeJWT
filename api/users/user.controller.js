@@ -95,6 +95,7 @@ module.exports = {
     },
     login: (req, res) => {
         const body = req.body;
+        console.log("inside controller");
         getUserByUserEmail(body.email, (err, results) => {
             if (err) {
                 console.log(err);
@@ -108,7 +109,7 @@ module.exports = {
             const result = compareSync(body.password, results.password);
             if (result) {
                 results.password = undefined;
-                const jsontoken = sign({ result: results }, "qwe1234", { expiresIn: "1h" });
+                const jsontoken = sign({ result: results }, "qwe1234", { expiresIn: "10h" });
                 return res.json({
                     success: 1,
                     message: "login successfully",
